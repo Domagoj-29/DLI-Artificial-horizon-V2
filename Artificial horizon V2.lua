@@ -3,8 +3,8 @@
 -- Workshop: https://steamcommunity.com/profiles/76561198935577915/myworkshopfiles/
 
 -- Tables start at the lowest pitch line
-local pitchLineDistance={35,28,21,14,7,-7,-14,-21,-28,-35}
-local pitchLineHalfLength={6,5,4,3,2,2,3,4,5,6}
+PitchLineDistance={35,28,21,14,7,-7,-14,-21,-28,-35}
+PitchLineHalfLength={6,5,4,3,2,2,3,4,5,6}
 
 -- onDraw functions
 
@@ -26,8 +26,8 @@ function drawPitchLine(distance,halfLength,middleX,middleY,angle,perpendicularAn
 end
 
 function onTick()
-	pitchDegrees=((input.getNumber(15)*4)*90)
-	rollDegrees=((input.getNumber(16)*-4)*90)
+	PitchDegrees=((input.getNumber(15)*4)*90)
+	RollDegrees=((input.getNumber(16)*-4)*90)
 
 	TopTilt=input.getNumber(18)
 end
@@ -35,12 +35,12 @@ function onDraw()
 	local w=screen.getWidth()
 	local h=screen.getHeight()
 
-	local pitchRadians=math.acos(pitchDegrees/180)
-	local rollRadians=math.rad(90-rollDegrees)
+	local pitchRadians=math.acos(PitchDegrees/180)
+	local rollRadians=math.rad(90-RollDegrees)
 
 	-- Roll applied to the top of the sky triangle and bottom of the ground triangle
-	local topRoll=math.rad(0-rollDegrees)
-	local bottomRoll=math.rad(180-rollDegrees)
+	local topRoll=math.rad(0-RollDegrees)
+	local bottomRoll=math.rad(180-RollDegrees)
 
 	-- Swaps the sky and ground triangles depending on pitch from the top tilt sensor
 	if TopTilt<0 then
@@ -91,7 +91,7 @@ function onDraw()
 
 	-- Pitch lines
 	for i=1,10 do
-		drawPitchLine(pitchLineDistance[i],pitchLineHalfLength[i],horizonLineMiddleX,horizonLineMiddleY,horizonAngle,horizonLinePerpendicularAngle,TopTilt)
+		drawPitchLine(PitchLineDistance[i],PitchLineHalfLength[i],horizonLineMiddleX,horizonLineMiddleY,horizonAngle,horizonLinePerpendicularAngle,TopTilt)
 	end
 
 	-- Center line with a V notch (fixed position)
